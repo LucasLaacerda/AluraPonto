@@ -131,5 +131,14 @@ extension ReciboViewController: CameraDelegate {
 }
 
 extension ReciboViewController: NSFetchedResultsControllerDelegate {
-    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        switch type {
+        case .delete:
+            if let indexPath = indexPath {
+                reciboTableView.deleteRows(at: [indexPath], with: .fade)
+            }
+        default:
+            reciboTableView.reloadData()
+        }
+    }
 }
